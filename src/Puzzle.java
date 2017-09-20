@@ -15,36 +15,64 @@ public class Puzzle {
 	 * create the board, then checks to see if it is solved and sets the "solved"
 	 * field accordingly.*/
 	public Puzzle(String inputPuzzle) {
-		System.out.println(inputPuzzle);
-		//TODO need to set board to some default value before doing board.get
-		//TODO because I'm getting a nullpointerexception because it was never initialized
+		//Initialize board
+		board = new ArrayList<ArrayList<Integer>>();
+		//Initialize the rows of the puzzle, which are the elements of board
+		ArrayList<Integer> row0 = new ArrayList<Integer>();
+		ArrayList<Integer> row1 = new ArrayList<Integer>();
+		ArrayList<Integer> row2 = new ArrayList<Integer>();
+		ArrayList<Integer> row3 = new ArrayList<Integer>();
+		ArrayList<Integer> row4 = new ArrayList<Integer>();
+		ArrayList<Integer> row5 = new ArrayList<Integer>();
+		ArrayList<Integer> row6 = new ArrayList<Integer>();
+		ArrayList<Integer> row7 = new ArrayList<Integer>();
+		ArrayList<Integer> row8 = new ArrayList<Integer>();
+		//Put these rows into the board
+		board.add(row0);
+		board.add(row1);
+		board.add(row2);
+		board.add(row3);
+		board.add(row4);
+		board.add(row5);
+		board.add(row6);
+		board.add(row7);
+		board.add(row8);
+		//Copy the inputed puzzle into board
 		for(int i = 0; i < inputPuzzle.length(); i++) {
-			int x = Character.getNumericValue(inputPuzzle.charAt(i));
-			int rowIndex = i/9;
-			int columnIndex = i%9;
-			board.get(rowIndex).set(columnIndex, x);
-			//board.get(i/9).set(i%9, Character.getNumericValue(inputPuzzle.charAt(i))); 
+			board.get(i/9).add(Character.getNumericValue(inputPuzzle.charAt(i)));
 		}
-		checkIfSolved();
+		//Check if the puzzle is already solved in order to set the solved field correctly
+		//Very important for the solve method
+		checkIfSolved(); 
 	}
 	
 	/**Checks if this puzzle is solved and sets the "solved" field accordingly.*/
 	public void checkIfSolved() {
-		if(board.contains(0)) {
+		//Zeroes represent blanks.  If board contains at least one zero, the puzzle is not yet solved.
+		if(board.get(0).contains(0) || board.get(1).contains(0) || board.get(2).contains(0)
+				|| board.get(3).contains(0) || board.get(4).contains(0) || board.get(5).contains(0)
+				|| board.get(6).contains(0) || board.get(7).contains(0) || board.get(8).contains(0)) {
 			solved = false;
 		}
+		//If there are no zeroes in board, then there are no blanks and the puzzle is solved.
 		else {
 			solved = true;
-			
 		}
 	}
 	
+	/**This method overrides Object's toString method so that when we solve
+	 * the puzzle we can print it out in a readable and understandable format.*/
 	@Override
 	public String toString() {
 		return "Puzzle Solved: [" + board + "]";
 	}
 	
+	/**This is the method that actually handles the logical solving of the puzzle.*/
 	public void solve() {
+		while(!solved) {
+			//TODO all of the actual logic of solving the puzzle.
+		}
+		//Print out the solved puzzle.  This is the end of the program.
 		System.out.println(this);
 	}
 
@@ -52,8 +80,11 @@ public class Puzzle {
 	 * The first 9 digits should be the first row in order, the second 9 digits
 	 * should be the second row, etc.  Blanks should be represented by 0's.*/
 	public static void main(String[] args) {
+		//args[0] is the puzzle that we are requesting to be solved.
 		String input = args[0];
+		//Create a new Puzzle object with our input.
 		Puzzle puzzle1 = new Puzzle(input);
+		//Call the solve method of our newly created Puzzle object to solve it.
 		puzzle1.solve();
 
 	}
