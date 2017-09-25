@@ -4,13 +4,50 @@ import java.util.ArrayList;
 public class Puzzle {
 	
 	/**True if the puzzle is solved, false otherwise.  As soon as solved is set to true
-	 * the first time, the solved puzzle will be printed. */
+	 * the first time, the solved puzzle will be printed.*/
 	private boolean solved;
 	
 	/**The grid you are filling out.  First index represents row, second index
-	 * represents column. */
+	 * represents column.*/
 	private ArrayList<ArrayList<Integer>> board;
 	
+	/**Lists that hold the possible values for the cells in a specific row.
+	 * Row 0 is topmost and row 8 is bottommost*/
+	private ArrayList<ArrayList<Integer>> posRow0;
+	private ArrayList<ArrayList<Integer>> posRow1;
+	private ArrayList<ArrayList<Integer>> posRow2;
+	private ArrayList<ArrayList<Integer>> posRow3;
+	private ArrayList<ArrayList<Integer>> posRow4;
+	private ArrayList<ArrayList<Integer>> posRow5;
+	private ArrayList<ArrayList<Integer>> posRow6;
+	private ArrayList<ArrayList<Integer>> posRow7;
+	private ArrayList<ArrayList<Integer>> posRow8;
+	
+	/**Lists that hold the possible values for the cells in a specific column.
+	 * Column zero is leftmost and column 8 is rightmost.*/
+	private ArrayList<ArrayList<Integer>> posCol0;
+	private ArrayList<ArrayList<Integer>> posCol1;
+	private ArrayList<ArrayList<Integer>> posCol2;
+	private ArrayList<ArrayList<Integer>> posCol3;
+	private ArrayList<ArrayList<Integer>> posCol4;
+	private ArrayList<ArrayList<Integer>> posCol5;
+	private ArrayList<ArrayList<Integer>> posCol6;
+	private ArrayList<ArrayList<Integer>> posCol7;
+	private ArrayList<ArrayList<Integer>> posCol8;
+	
+	/**Lists that hold the possible values for the cells in a specific 3x3 cell.
+	 * Cell 0 is top left corner and cell 8 is bottom right corner, proceeding left
+	 * to right with the numbering and then down to the next row, like a telephone.*/
+	private ArrayList<ArrayList<Integer>> posCell0;
+	private ArrayList<ArrayList<Integer>> posCell1;
+	private ArrayList<ArrayList<Integer>> posCell2;
+	private ArrayList<ArrayList<Integer>> posCell3;
+	private ArrayList<ArrayList<Integer>> posCell4;
+	private ArrayList<ArrayList<Integer>> posCell5;
+	private ArrayList<ArrayList<Integer>> posCell6;
+	private ArrayList<ArrayList<Integer>> posCell7;
+	private ArrayList<ArrayList<Integer>> posCell8;
+
 	/**Constructs a new puzzle to solve.  First parses the provided argument to
 	 * create the board, then checks to see if it is solved and sets the "solved"
 	 * field accordingly.*/
@@ -43,7 +80,40 @@ public class Puzzle {
 		}
 		//Check if the puzzle is already solved in order to set the solved field correctly
 		//Very important for the solve method
-		checkIfSolved(); 
+		checkIfSolved();
+		
+		//Initialize all the possible value lists
+		posRow0 = new ArrayList<ArrayList<Integer>>();
+		posRow1 = new ArrayList<ArrayList<Integer>>();
+		posRow2 = new ArrayList<ArrayList<Integer>>();
+		posRow3 = new ArrayList<ArrayList<Integer>>();
+		posRow4 = new ArrayList<ArrayList<Integer>>();
+		posRow5 = new ArrayList<ArrayList<Integer>>();
+		posRow6 = new ArrayList<ArrayList<Integer>>();
+		posRow7 = new ArrayList<ArrayList<Integer>>();
+		posRow8 = new ArrayList<ArrayList<Integer>>();
+		posCol0 = new ArrayList<ArrayList<Integer>>();
+		posCol1 = new ArrayList<ArrayList<Integer>>();
+		posCol2 = new ArrayList<ArrayList<Integer>>();
+		posCol3 = new ArrayList<ArrayList<Integer>>();
+		posCol4 = new ArrayList<ArrayList<Integer>>();
+		posCol5 = new ArrayList<ArrayList<Integer>>();
+		posCol6 = new ArrayList<ArrayList<Integer>>();
+		posCol7 = new ArrayList<ArrayList<Integer>>();
+		posCol8 = new ArrayList<ArrayList<Integer>>();
+		posCell0 = new ArrayList<ArrayList<Integer>>();
+		posCell1 = new ArrayList<ArrayList<Integer>>();
+		posCell2 = new ArrayList<ArrayList<Integer>>();
+		posCell3 = new ArrayList<ArrayList<Integer>>();
+		posCell4 = new ArrayList<ArrayList<Integer>>();
+		posCell5 = new ArrayList<ArrayList<Integer>>();
+		posCell6 = new ArrayList<ArrayList<Integer>>();
+		posCell7 = new ArrayList<ArrayList<Integer>>();
+		posCell8 = new ArrayList<ArrayList<Integer>>();
+		
+		//use cases for rows and columns, and if statements inside the rows cases for the cells
+		
+	
 	}
 	
 	/**Checks if this puzzle is solved and sets the "solved" field accordingly.*/
@@ -69,6 +139,7 @@ public class Puzzle {
 	
 	/**This is the method that actually handles the logical solving of the puzzle.*/
 	public void solve() {
+		
 		while(!solved) {
 			//TODO all of the actual logic of solving the puzzle.
 		}
