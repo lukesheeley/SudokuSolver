@@ -58,27 +58,16 @@ public class Puzzle {
 		//Initialize board
 		board = new ArrayList<ArrayList<Integer>>();
 		
-		//Initialize the rows of the puzzle, which are the elements of board
-		ArrayList<Integer> row0 = new ArrayList<Integer>();
-		ArrayList<Integer> row1 = new ArrayList<Integer>();
-		ArrayList<Integer> row2 = new ArrayList<Integer>();
-		ArrayList<Integer> row3 = new ArrayList<Integer>();
-		ArrayList<Integer> row4 = new ArrayList<Integer>();
-		ArrayList<Integer> row5 = new ArrayList<Integer>();
-		ArrayList<Integer> row6 = new ArrayList<Integer>();
-		ArrayList<Integer> row7 = new ArrayList<Integer>();
-		ArrayList<Integer> row8 = new ArrayList<Integer>();
-		
-		//Put these rows into the board
-		board.add(row0);
-		board.add(row1);
-		board.add(row2);
-		board.add(row3);
-		board.add(row4);
-		board.add(row5);
-		board.add(row6);
-		board.add(row7);
-		board.add(row8);
+		//Initialize the elements of board
+		board.add(new ArrayList<Integer>());
+		board.add(new ArrayList<Integer>());
+		board.add(new ArrayList<Integer>());
+		board.add(new ArrayList<Integer>());
+		board.add(new ArrayList<Integer>());
+		board.add(new ArrayList<Integer>());
+		board.add(new ArrayList<Integer>());
+		board.add(new ArrayList<Integer>());
+		board.add(new ArrayList<Integer>());
 		
 		//Copy the inputed puzzle into board
 		for(int i = 0; i < inputPuzzle.length(); i++) {
@@ -277,6 +266,9 @@ public class Puzzle {
 				}
 			}
 		}
+		System.out.println(posRow0);
+		System.out.println(posCol4);
+		System.out.println(posCell7);
 	}
 	
 	/**Checks if this puzzle is solved and sets the "solved" field accordingly.*/
