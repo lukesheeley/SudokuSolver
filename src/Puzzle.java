@@ -50,10 +50,14 @@ public class Puzzle {
 
 	/**Constructs a new puzzle to solve.  First parses the provided argument to
 	 * create the board, then checks to see if it is solved and sets the "solved"
-	 * field accordingly.*/
+	 * field accordingly.  Next it sets up all the possible value lists and places them
+	 * in the appropriate fields so that they overlap between rows, columns, and cells
+	 * correctly.  Lastly, it checks the numbers the board starts with and sets the 
+	 * possible value lists for such cells.*/
 	public Puzzle(String inputPuzzle) {
 		//Initialize board
 		board = new ArrayList<ArrayList<Integer>>();
+		
 		//Initialize the rows of the puzzle, which are the elements of board
 		ArrayList<Integer> row0 = new ArrayList<Integer>();
 		ArrayList<Integer> row1 = new ArrayList<Integer>();
@@ -64,6 +68,7 @@ public class Puzzle {
 		ArrayList<Integer> row6 = new ArrayList<Integer>();
 		ArrayList<Integer> row7 = new ArrayList<Integer>();
 		ArrayList<Integer> row8 = new ArrayList<Integer>();
+		
 		//Put these rows into the board
 		board.add(row0);
 		board.add(row1);
@@ -74,10 +79,12 @@ public class Puzzle {
 		board.add(row6);
 		board.add(row7);
 		board.add(row8);
+		
 		//Copy the inputed puzzle into board
 		for(int i = 0; i < inputPuzzle.length(); i++) {
 			board.get(i/9).add(Character.getNumericValue(inputPuzzle.charAt(i)));
 		}
+		
 		//Check if the puzzle is already solved in order to set the solved field correctly
 		//Very important for the solve method
 		checkIfSolved();
@@ -111,9 +118,165 @@ public class Puzzle {
 		posCell7 = new ArrayList<ArrayList<Integer>>();
 		posCell8 = new ArrayList<ArrayList<Integer>>();
 		
-		//use cases for rows and columns, and if statements inside the rows cases for the cells
+		//Initialize and load a full possible value list
+		ArrayList<Integer> posv = new ArrayList<Integer>();
+		posv.add(1);
+		posv.add(2);
+		posv.add(3);
+		posv.add(4);
+		posv.add(5);
+		posv.add(6);
+		posv.add(7);
+		posv.add(8);
+		posv.add(9);
 		
-	
+		//try nested for loop (outside loop row, inside loop column) with if statements in column loop for cells
+		
+		//Create a possible value list for every space in the board and put them in the right places
+		for(int posi = 0; posi < inputPuzzle.length(); posi++) {
+			//Create a copy of the default possible value list
+			ArrayList<Integer> posvtemp = new ArrayList<Integer>(posv);
+			
+			//Put the possible value list into the right row
+			switch (posi/9) {
+				case 0: 
+					posRow0.add(posvtemp);
+					break;
+				case 1: 
+					posRow1.add(posvtemp);
+					break;
+				case 2: 
+					posRow2.add(posvtemp);
+					break;
+				case 3: 
+					posRow3.add(posvtemp);
+					break;
+				case 4: 
+					posRow4.add(posvtemp);
+					break;
+				case 5: 
+					posRow5.add(posvtemp);
+					break;
+				case 6: 
+					posRow6.add(posvtemp);
+					break;
+				case 7: 
+					posRow7.add(posvtemp);
+					break;
+				case 8: 
+					posRow8.add(posvtemp);
+					break;
+			}
+			
+			//Put the possible value list into the right column
+			switch (posi%9) {
+				case 0: 
+					posCol0.add(posvtemp);
+					break;
+				case 1: 
+					posCol1.add(posvtemp);
+					break;
+				case 2: 
+					posCol2.add(posvtemp);
+					break;
+				case 3: 
+					posCol3.add(posvtemp);
+					break;
+				case 4: 
+					posCol4.add(posvtemp);
+					break;
+				case 5: 
+					posCol5.add(posvtemp);
+					break;
+				case 6: 
+					posCol6.add(posvtemp);
+					break;
+				case 7: 
+					posCol7.add(posvtemp);
+					break;
+				case 8: 
+					posCol8.add(posvtemp);
+					break;
+			}
+			//Put the possible list value into the right cell
+			if (posi/9 < 3) {
+				if (posi%9 < 3) {
+					posCell0.add(posvtemp);
+				}
+				else if (posi%9 < 6) {
+					posCell1.add(posvtemp);
+				}
+				else {
+					posCell2.add(posvtemp);
+				}
+			}
+			else if (posi/9 < 6) {
+				if (posi%9 < 3) {
+					posCell3.add(posvtemp);
+				}
+				else if (posi%9 < 6) {
+					posCell4.add(posvtemp);
+				}
+				else {
+					posCell5.add(posvtemp);
+				}
+			}
+			else {
+				if (posi%9 < 3) {
+					posCell6.add(posvtemp);
+				}
+				else if (posi%9 < 6) {
+					posCell7.add(posvtemp);
+				}
+				else {
+					posCell8.add(posvtemp);
+				}
+			}
+		}
+		
+		//Check the board and update the possible value lists accordingly
+		for(int ti = 0; ti < inputPuzzle.length(); ti++) {
+			if (board.get(ti/9).get(ti%9) != 0) {
+				switch (ti/9) {
+					case 0: 
+						posRow0.get(ti%9).clear();
+						posRow0.get(ti%9).add(board.get(ti/9).get(ti%9));
+						break;
+					case 1: 
+						posRow1.get(ti%9).clear();
+						posRow1.get(ti%9).add(board.get(ti/9).get(ti%9));
+						break;
+					case 2: 
+						posRow2.get(ti%9).clear();
+						posRow2.get(ti%9).add(board.get(ti/9).get(ti%9));
+						break;
+					case 3: 
+						posRow3.get(ti%9).clear();
+						posRow3.get(ti%9).add(board.get(ti/9).get(ti%9));
+						break;
+					case 4: 
+						posRow4.get(ti%9).clear();
+						posRow4.get(ti%9).add(board.get(ti/9).get(ti%9));
+						break;
+					case 5: 
+						posRow5.get(ti%9).clear();
+						posRow5.get(ti%9).add(board.get(ti/9).get(ti%9));
+						break;
+					case 6: 
+						posRow6.get(ti%9).clear();
+						posRow6.get(ti%9).add(board.get(ti/9).get(ti%9));
+						break;
+					case 7: 
+						posRow7.get(ti%9).clear();
+						posRow7.get(ti%9).add(board.get(ti/9).get(ti%9));
+						break;
+					case 8: 
+						posRow8.get(ti%9).clear();
+						posRow8.get(ti%9).add(board.get(ti/9).get(ti%9));
+						break;
+				}
+			}
+		}
 	}
 	
 	/**Checks if this puzzle is solved and sets the "solved" field accordingly.*/
@@ -140,9 +303,9 @@ public class Puzzle {
 	/**This is the method that actually handles the logical solving of the puzzle.*/
 	public void solve() {
 		
-		while(!solved) {
+		//while(!solved) {
 			//TODO all of the actual logic of solving the puzzle.
-		}
+		//}
 		//Print out the solved puzzle.  This is the end of the program.
 		System.out.println(this);
 	}
