@@ -266,9 +266,34 @@ public class Puzzle {
 				}
 			}
 		}
-		System.out.println(posRow0);
-		System.out.println(posCol4);
-		System.out.println(posCell7);
+		//System.out.println(posRow0);
+		//System.out.println(posCol4);
+		//System.out.println(posCell7);
+		//hasXTrimAll(posCell7);
+		//System.out.println(posCell7);
+		//posCell7.get(6).clear();
+		//posCell7.get(6).add(6);
+		//hasXTrim(posCell7, 6);
+		//System.out.println(posCell7);
+		//System.out.println(board);
+		//fillInBoard(posRow8, 8);
+		//System.out.println(board);
+		//posCell7.get(0).remove(0);
+		//posCell7.get(2).remove(0);
+		//posCell7.get(4).remove(0);
+		//posCell7.get(0).remove(1);
+		//posCell7.get(4).remove(1);
+		//System.out.println(posCell7);
+		//onlyPosCellAll(posCell7);
+		//System.out.println(posCell7);
+		//System.out.println(posCell7);
+		//onlyPosCell(posCell7, 3);
+		//System.out.println(posCell7);
+		//onlyPosCell(posCell7, 1);
+		//System.out.println(posCell7);
+		//onlyPosCell(posCell7, 3);
+		//System.out.println(posCell7);
+		
 	}
 	
 	/**Checks if this puzzle is solved and sets the "solved" field accordingly.*/
@@ -289,15 +314,162 @@ public class Puzzle {
 	 * the puzzle we can print it out in a readable and understandable format.*/
 	@Override
 	public String toString() {
-		return "Puzzle Solved: [" + board + "]";
+		return "Puzzle Solved: " + board;
+	}
+	
+	/**This method checks whether a given possible value list has an element
+	 * whose sole element is the given number and, if so, removes that number from the
+	 * other elements of the possible value list.  For example, checks if column 4 has
+	 * a 9 in it, and if it does, takes 9 out of the possible value lists for the rest
+	 * of column 4, as no number can appear twice in a column.*/
+	public void hasXTrim(ArrayList<ArrayList<Integer>> pos, Integer x) {
+		ArrayList<Integer> xarr = new ArrayList<Integer>();
+		xarr.add(x);
+		if (pos.contains(xarr)) {
+			for(int i = 0; i < pos.size(); i++) {
+				if (i == pos.indexOf(xarr)) {
+					continue;
+				}
+				else {
+				pos.get(i).remove(x);
+				}
+			}
+		}
+	}
+	
+	/**This method runs hasXTrim for all possible values on a possible value list.*/
+	public void hasXTrimAll(ArrayList<ArrayList<Integer>> pos) {
+		for (int i = 1; i < pos.size() + 1; i++) {
+			hasXTrim(pos, i);
+		}
+	}
+	
+	/**This method should take in a ROW of possible values, and will update the board
+	 * as needed.  If a possible value list other than one of the posRowx lists is given,
+	 * this method will throw everything off.  Row lists are required because the board
+	 * is structured by rows.*/
+	public void fillInBoard(ArrayList<ArrayList<Integer>> pos, Integer x) {
+		for (int i = 0; i < pos.size(); i++) {
+			if(pos.get(i).size() == 1 && board.get(x).get(i) == 0) {
+				board.get(x).set(i, pos.get(i).get(0));
+			}
+		}
+	}
+	
+	/**This method runs fillInBoard for all rows.  Conveniently eliminates having
+	 * to worry about only passing rows as arguments, as it has no parameters.*/
+	public void fillInBoardAll() {
+		fillInBoard(posRow0, 0);
+		fillInBoard(posRow1, 1);
+		fillInBoard(posRow2, 2);
+		fillInBoard(posRow3, 3);
+		fillInBoard(posRow4, 4);
+		fillInBoard(posRow5, 5);
+		fillInBoard(posRow6, 6);
+		fillInBoard(posRow7, 7);
+		fillInBoard(posRow8, 8);
+	}
+	
+	/**This method checks if there is only one cell represented by the given possible value 
+	 * list that still contains the given integer and, if so, makes that the only possible
+	 * value for that cell.*/
+	public void onlyPosCell(ArrayList<ArrayList<Integer>> pos, Integer x) {
+		int count = 0;
+		int cell = 0;
+		for (int i = 0; i < pos.size(); i++) {
+			if (pos.get(i).size() > 1 && pos.get(i).contains(x)) {
+				count++;
+				cell = i;
+			}
+		}
+		if (count == 1) {
+			pos.get(cell).clear();
+			pos.get(cell).add(x);
+		}
+	}
+	
+	/**This method runs onlyPosCell for all possible values on a possible value list.*/
+	public void onlyPosCellAll(ArrayList<ArrayList<Integer>> pos) {
+		for (int i = 1; i < pos.size() + 1; i++) {
+			onlyPosCell(pos, i);
+		}
 	}
 	
 	/**This is the method that actually handles the logical solving of the puzzle.*/
 	public void solve() {
-		
-		//while(!solved) {
-			//TODO all of the actual logic of solving the puzzle.
-		//}
+		System.out.println(board);
+		//This loop will continue trying to solve the puzzle until the whole board is filled.
+		while(!solved) {
+			hasXTrimAll(posRow0);
+			hasXTrimAll(posRow1);
+			hasXTrimAll(posRow2);
+			hasXTrimAll(posRow3);
+			hasXTrimAll(posRow4);
+			hasXTrimAll(posRow5);
+			hasXTrimAll(posRow6);
+			hasXTrimAll(posRow7);
+			hasXTrimAll(posRow8);
+			hasXTrimAll(posCol0);
+			hasXTrimAll(posCol1);
+			hasXTrimAll(posCol2);
+			hasXTrimAll(posCol3);
+			hasXTrimAll(posCol4);
+			hasXTrimAll(posCol5);
+			hasXTrimAll(posCol6);
+			hasXTrimAll(posCol7);
+			hasXTrimAll(posCol8);
+			hasXTrimAll(posCell0);
+			hasXTrimAll(posCell1);
+			hasXTrimAll(posCell2);
+			hasXTrimAll(posCell3);
+			hasXTrimAll(posCell4);
+			hasXTrimAll(posCell5);
+			hasXTrimAll(posCell6);
+			hasXTrimAll(posCell7);
+			hasXTrimAll(posCell8);
+			System.out.println(posRow0);
+			System.out.println(posRow1);
+			System.out.println(posRow2);
+			System.out.println(posRow3);
+			System.out.println(posRow4);
+			System.out.println(posRow5);
+			System.out.println(posRow6);
+			System.out.println(posRow7);
+			System.out.println(posRow8);
+			/**
+			onlyPosCellAll(posRow0);
+			onlyPosCellAll(posRow1);
+			onlyPosCellAll(posRow2);
+			onlyPosCellAll(posRow3);
+			onlyPosCellAll(posRow4);
+			onlyPosCellAll(posRow5);
+			onlyPosCellAll(posRow6);
+			onlyPosCellAll(posRow7);
+			onlyPosCellAll(posRow8);
+			onlyPosCellAll(posCol0);
+			onlyPosCellAll(posCol1);
+			onlyPosCellAll(posCol2);
+			onlyPosCellAll(posCol3);
+			onlyPosCellAll(posCol4);
+			onlyPosCellAll(posCol5);
+			onlyPosCellAll(posCol6);
+			onlyPosCellAll(posCol7);
+			onlyPosCellAll(posCol8);
+			onlyPosCellAll(posCell0);
+			onlyPosCellAll(posCell1);
+			onlyPosCellAll(posCell2);
+			onlyPosCellAll(posCell3);
+			onlyPosCellAll(posCell4);
+			onlyPosCellAll(posCell5);
+			onlyPosCellAll(posCell6);
+			onlyPosCellAll(posCell7);
+			onlyPosCellAll(posCell8);
+			*/
+			fillInBoardAll();
+			System.out.println(board);
+			checkIfSolved();
+		}
+		//While loop quit, so puzzle is solved.
 		//Print out the solved puzzle.  This is the end of the program.
 		System.out.println(this);
 	}
