@@ -119,8 +119,6 @@ public class Puzzle {
 		posv.add(8);
 		posv.add(9);
 		
-		//try nested for loop (outside loop row, inside loop column) with if statements in column loop for cells
-		
 		//Create a possible value list for every space in the board and put them in the right places
 		for(int posi = 0; posi < inputPuzzle.length(); posi++) {
 			//Create a copy of the default possible value list
@@ -265,35 +263,7 @@ public class Puzzle {
 						break;
 				}
 			}
-		}
-		//System.out.println(posRow0);
-		//System.out.println(posCol4);
-		//System.out.println(posCell7);
-		//hasXTrimAll(posCell7);
-		//System.out.println(posCell7);
-		//posCell7.get(6).clear();
-		//posCell7.get(6).add(6);
-		//hasXTrim(posCell7, 6);
-		//System.out.println(posCell7);
-		//System.out.println(board);
-		//fillInBoard(posRow8, 8);
-		//System.out.println(board);
-		//posCell7.get(0).remove(0);
-		//posCell7.get(2).remove(0);
-		//posCell7.get(4).remove(0);
-		//posCell7.get(0).remove(1);
-		//posCell7.get(4).remove(1);
-		//System.out.println(posCell7);
-		//onlyPosCellAll(posCell7);
-		//System.out.println(posCell7);
-		//System.out.println(posCell7);
-		//onlyPosCell(posCell7, 3);
-		//System.out.println(posCell7);
-		//onlyPosCell(posCell7, 1);
-		//System.out.println(posCell7);
-		//onlyPosCell(posCell7, 3);
-		//System.out.println(posCell7);
-		
+		}	
 	}
 	
 	/**Checks if this puzzle is solved and sets the "solved" field accordingly.*/
