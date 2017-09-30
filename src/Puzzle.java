@@ -401,17 +401,46 @@ public class Puzzle {
 	
 	/**This method runs onlyPosCell for all possible values on a possible value list.  It
 	 * returns false if pos remained unchanged and true if pos was changed.*/
-	public boolean onlyPosCellAll(ArrayList<ArrayList<Integer>> pos) {
+	public void onlyPosCellAll(ArrayList<ArrayList<Integer>> pos) {
 		ArrayList<ArrayList<Integer>> preList = copyPosBoard(pos);
 		for (int i = 1; i < pos.size() + 1; i++) {
 			onlyPosCell(pos, i);
 		}
-		if (preList.equals(pos)) {
-			return false;
+		if (!preList.equals(pos)) {
+			trimLoop();
 		}
-		else {
-			return true;
-		}
+	}
+	
+	/**This method runs onlyPosCellAll for all possible value lists, trimming as necessary.*/
+	public void onlyPosCellBattery() {
+		onlyPosCellAll(posRow0);
+		onlyPosCellAll(posRow1);
+		onlyPosCellAll(posRow2);
+		onlyPosCellAll(posRow3);
+		onlyPosCellAll(posRow4);
+		onlyPosCellAll(posRow5);
+		onlyPosCellAll(posRow6);
+		onlyPosCellAll(posRow7);
+		onlyPosCellAll(posRow8);
+		onlyPosCellAll(posCol0);
+		onlyPosCellAll(posCol1);
+		onlyPosCellAll(posCol2);
+		onlyPosCellAll(posCol3);
+		onlyPosCellAll(posCol4);
+		onlyPosCellAll(posCol5);
+		onlyPosCellAll(posCol6);
+		onlyPosCellAll(posCol7);
+		onlyPosCellAll(posCol8);
+		onlyPosCellAll(posCell0);
+		onlyPosCellAll(posCell1);
+		onlyPosCellAll(posCell2);
+		onlyPosCellAll(posCell3);
+		onlyPosCellAll(posCell4);
+		onlyPosCellAll(posCell5);
+		onlyPosCellAll(posCell6);
+		onlyPosCellAll(posCell7);
+		onlyPosCellAll(posCell8);
+		fillInBoardAll();
 	}
 	
 	/**This method returns an independent copy of the given possible value list or board.
@@ -436,88 +465,7 @@ public class Puzzle {
 		//This loop will continue trying to solve the puzzle until the whole board is filled.
 		while (!solved) {
 			trimLoop();
-			if (onlyPosCellAll(posRow0)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posRow1)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posRow2)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posRow3)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posRow4)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posRow5)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posRow6)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posRow7)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posRow8)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCol0)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCol1)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCol2)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCol3)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCol4)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCol5)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCol6)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCol7)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCol8)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCell0)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCell1)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCell2)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCell3)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCell4)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCell5)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCell6)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCell7)) {
-				trimLoop();
-			}
-			if (onlyPosCellAll(posCell8)) {
-				trimLoop();
-			}
-			fillInBoardAll();
+			onlyPosCellBattery();
 			System.out.println(board);
 			checkIfSolved();
 		}
