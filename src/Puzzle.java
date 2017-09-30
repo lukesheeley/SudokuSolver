@@ -295,13 +295,14 @@ public class Puzzle {
 	public void hasXTrim(ArrayList<ArrayList<Integer>> pos, Integer x) {
 		ArrayList<Integer> xarr = new ArrayList<Integer>();
 		xarr.add(x);
+		//if pos has [x] as an element, x is removed from all other elements of pos.
 		if (pos.contains(xarr)) {
 			for(int i = 0; i < pos.size(); i++) {
 				if (i == pos.indexOf(xarr)) {
 					continue;
 				}
 				else {
-				pos.get(i).remove(x);
+					pos.get(i).remove(x);
 				}
 			}
 		}
@@ -319,6 +320,10 @@ public class Puzzle {
 	public void trimLoop() {
 		ArrayList<ArrayList<Integer>> preTrim;
 		boolean trimDone = false;
+		//Trimming one possible value list could result in an element of the form [x],
+		//in which case the other possible value lists that contain that element 
+		//would need to be trimmed.  Therefore we have to run until nothing else
+		//can be trimmed.
 		while (!trimDone) {
 			preTrim = copyPosBoard(board);
 			hasXTrimAll(posRow0);
@@ -360,6 +365,8 @@ public class Puzzle {
 	 * this method will throw everything off.  Row lists are required because the board
 	 * is structured by rows.*/
 	public void fillInBoard(ArrayList<ArrayList<Integer>> pos, Integer x) {
+		//This loop looks for elements in pos that look like [value] and puts them into
+		//the board if the corresponding cell in board was previously blank.
 		for (int i = 0; i < pos.size(); i++) {
 			if(pos.get(i).size() == 1 && board.get(x).get(i) == 0) {
 				board.get(x).set(i, pos.get(i).get(0));
@@ -387,6 +394,10 @@ public class Puzzle {
 	public void onlyPosCell(ArrayList<ArrayList<Integer>> pos, Integer x) {
 		int count = 0;
 		int cell = 0;
+		//this loop counts how many times x appears in the possible
+		//value lists of pos.  If x is already in pos, (if pos contains [x] as
+		//an element), then nothing will happen.  Otherwise, if x is in only one element
+		//of pos, it will set that element to [x].  (if statement below).
 		for (int i = 0; i < pos.size(); i++) {
 			if (pos.get(i).size() > 1 && pos.get(i).contains(x)) {
 				count++;
@@ -406,6 +417,10 @@ public class Puzzle {
 		for (int i = 1; i < pos.size() + 1; i++) {
 			onlyPosCell(pos, i);
 		}
+		//If running onlyPosCell for any of the values results in progress, we need to trim
+		//Say when running this method for posRow2, you are able to determine that the cell
+		//in column 4 is 3.  3 will not be in any possible value lists of that row, but
+		//the values in column 4 and cell 1 need 3 trimmed from them.
 		if (!preList.equals(pos)) {
 			trimLoop();
 		}
@@ -464,7 +479,9 @@ public class Puzzle {
 		System.out.println(board);
 		//This loop will continue trying to solve the puzzle until the whole board is filled.
 		while (!solved) {
+			//try trimming.
 			trimLoop();
+			//try onlyPos-ing.
 			onlyPosCellBattery();
 			System.out.println(board);
 			checkIfSolved();
