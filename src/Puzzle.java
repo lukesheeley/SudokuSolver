@@ -458,6 +458,18 @@ public class Puzzle {
 		fillInBoardAll();
 	}
 	
+	/**This method trims the given two values from the given possible value list.*/
+	public void trimPair(ArrayList<ArrayList<Integer>> pos, ArrayList<Integer> pair) {
+		//TODO should be pretty straightforward.
+	}
+	
+	/**This method looks through the given possible value list and tries to find two elements
+	 * of the form [x, y], where x and y are two different possible values.  If such a pair
+	 * exists, it runs trimPair and then trimLoop.*/
+	public void onlyPosPair(ArrayList<ArrayList<Integer>> pos) {
+		//TODO implement 
+	}
+	
 	/**This method returns an independent copy of the given possible value list or board.
 	 * Iterating variable names may be misleading.  This method was originally written
 	 * only to copy the board, but it later became useful to copy other 
